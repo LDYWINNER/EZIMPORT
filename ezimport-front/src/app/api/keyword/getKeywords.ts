@@ -1,9 +1,7 @@
 import { Keyword } from "@/types";
 
 export const getKeywords = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/keyword`
-  );
+  const response = await fetch(`http://localhost:3000/api/keyword`);
 
   if (!response.ok) {
     return { keywords: [] };

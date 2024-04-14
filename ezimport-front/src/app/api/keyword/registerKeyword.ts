@@ -1,5 +1,5 @@
 export const registerKeyword = async (data: { keyword: string }) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/keyword`, {
+  const response = await fetch(`http://localhost:3000/api/keyword`, {
     method: "POST",
     body: JSON.stringify(data),
   });

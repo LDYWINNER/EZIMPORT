@@ -1,1 +1,1 @@
-export { default } from "./MenagedKeyword";
+export { default } from "./ManagedKeyword";
