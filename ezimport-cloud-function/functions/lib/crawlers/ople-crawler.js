@@ -7,12 +7,16 @@ class OpleCrawler {
         this.getRecommendArticles = async (page) => {
             return page.evaluate(() => {
                 const elements = document.querySelectorAll("article div.l.er.ib > a:nth-child(1), article h2, article h3, article div.h > img, article div.ht > div > div.bl > a > p, article div.l > img");
-                const linkEl = document.querySelectorAll("article div.l.er.ib > a:nth-child(1)");
-                const titleEl = document.querySelectorAll("article h2");
-                const descriptionEl = document.querySelectorAll("article h3");
-                const mainImageEl = document.querySelectorAll("article div.h > img");
-                const avatarEl = document.querySelectorAll("article div.l > img");
-                const editorEl = document.querySelectorAll("article div.ht > div > div.bl > a > p");
+                // const linkEl = document.querySelectorAll(
+                //   "article div.l.er.ib > a:nth-child(1)"
+                // );
+                // const titleEl = document.querySelectorAll("article h2");
+                // const descriptionEl = document.querySelectorAll("article h3");
+                // const mainImageEl = document.querySelectorAll("article div.h > img");
+                // const avatarEl = document.querySelectorAll("article div.l > img");
+                // const editorEl = document.querySelectorAll(
+                //   "article div.ht > div > div.bl > a > p"
+                // );
                 const articles = [];
                 let obj = {};
                 function checkObjectKey(obj, key) {
@@ -84,21 +88,32 @@ class OpleCrawler {
         });
         return browser;
     }
+    async scraping(page, keyword) {
+        await page.goto(`https://medium.com/tag/${keyword}/recommended`, {
+            waitUntil: "domcontentloaded",
+        });
+        return this.getRecommendArticles(page);
+    }
     async start() {
         const firestore = new firebase_1.Database(firebase_1.db);
         const browser = await this.initBrowser();
         const page = await browser.newPage();
-        await page.goto("https://medium.com/tag/react/recommended", {
-            waitUntil: "domcontentloaded",
-        });
-        const articles = await this.getRecommendArticles(page);
+        const keywordResults = await firestore.getAllData("keywords");
+        let articles = [];
+        for (const result of keywordResults) {
+            const _article = await this.scraping(page, result.keyword);
+            console.log(_article);
+            const mergeKeyword = _article.map((ar) => (Object.assign(Object.assign({}, ar), { keyword: result.keyword })));
+            articles.push(...mergeKeyword);
+        }
+        // insert data
         const result = await Promise.all(articles.map(async (article) => {
             const checkExist = await firestore.getData("article", "title", article.title);
             if (checkExist.length > 0) {
                 return null;
             }
             else {
-                const doc = await firestore.addData("article", article);
+                const doc = await firestore.addData("articles", article);
                 return doc.id;
             }
         }));
