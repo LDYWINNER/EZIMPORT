@@ -21,3 +21,19 @@ export const startOpleCrawler = functions
     await crawler.start();
     response.send("End Crawler");
   });
+
+// 한국 시간으로 매일 3시에 실행: scheduler 는 에뮬레이터로 테스트 불가
+export const scheduleFunctionCronTab = functions
+  .region("asia-northeast3")
+  .runWith({
+    memory: "2GB",
+    timeoutSeconds: 120,
+  })
+  .pubsub.schedule("* 3 * * *")
+  .timeZone("Asia/Seoul")
+  .onRun(async () => {
+    functions.logger.info("Start Crawler", { structuredData: true });
+    const crawler = new OpleCrawler();
+    await crawler.start();
+    return null;
+  });
