@@ -54,6 +54,7 @@ export class Database {
 
     return result;
   }
+
   async getAllData(collections: string) {
     const querySnapshot = await getDocs(collection(this.db, collections));
 
