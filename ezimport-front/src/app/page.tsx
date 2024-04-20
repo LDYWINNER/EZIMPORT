@@ -1,17 +1,31 @@
-import ArticleList from "@/components/ArticleList/ArticleList";
-import Header from "@/components/Common/Header";
-import ManagedKeyword from "@/components/ManagedKeyword";
+import Link from "next/link";
+import { ModeToggle } from "@/components/DarkModeToggle";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-black">
-      <div className="font-mono w-[420px] bg-white">
-        <Header />
-        <div className="mt-[60px] py-10">
-          <ManagedKeyword />
-          <ArticleList />
+    <div className="flex flex-col items-center justify-between min-h-screen p-6">
+      <div className="my-auto flex flex-col items-center gap-2 *:font-medium">
+        <span className="text-9xl">😄</span>
+        <div className="flex">
+          <h1 className="text-4xl ">EzImport</h1>
+          <ModeToggle />
+        </div>
+        <h2 className="text-2xl">EzImport에 어서오세요!</h2>
+      </div>
+      <div className="flex flex-col items-center gap-3 w-full">
+        <Link
+          href="/create-account"
+          className="w-full bg-orange-500 text-white text-lg font-medium py-2.5 rounded-md text-center hover:bg-orange-400 transition-colors"
+        >
+          시작하기
+        </Link>
+        <div className="flex gap-2">
+          <span>이미 계정이 있나요?</span>
+          <Link href="/login" className="hover:underline">
+            로그인
+          </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
