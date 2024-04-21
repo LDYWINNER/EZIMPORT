@@ -1,9 +1,22 @@
+"use client";
+
+import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 import Link from "next/link";
-import { ModeToggle } from "@/components/DarkModeToggle";
+import { useEffect } from "react";
 
 export default function Home() {
+  const { setTheme } = useTheme();
+  useEffect(() => {
+    setTheme("system");
+  }, []);
+
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen p-6">
+    <div
+      className={cn(
+        "flex flex-col items-center justify-between min-h-screen p-6"
+      )}
+    >
       <div className="my-auto flex flex-col items-center gap-2 *:font-medium">
         <span className="text-9xl">😄</span>
         <div className="flex">
