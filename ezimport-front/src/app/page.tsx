@@ -8,7 +8,6 @@ export default function Home() {
         <span className="text-9xl">😄</span>
         <div className="flex">
           <h1 className="text-4xl ">EzImport</h1>
-          <ModeToggle />
         </div>
         <h2 className="text-2xl">EzImport에 어서오세요!</h2>
       </div>
