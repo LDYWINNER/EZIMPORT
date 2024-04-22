@@ -101,7 +101,7 @@ export async function createAccount(prevState: any, formData: FormData) {
     });
     // log the user in
     const cookie = await getIronSession(cookies(), {
-      cookieName: process.env.COOKIE_NAME!,
+      cookieName: "ezimport-auth-cookie",
       password: process.env.COOKIE_PASSWORD!,
     });
     //@ts-ignore
