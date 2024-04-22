@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect } from "react";
+import "@/lib/db";
 
 export default function Home() {
   const { setTheme } = useTheme();
