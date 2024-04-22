@@ -1,4 +1,6 @@
 "use server";
+
+import bcrypt from "bcrypt";
 import {
   PASSWORD_MIN_LENGTH,
   PASSWORD_REGEX,
@@ -6,6 +8,9 @@ import {
 } from "@/lib/constants";
 import db from "@/lib/db";
 import { z } from "zod";
+import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const checkUsername = (username: string) => !username.includes("admin");
 
@@ -39,7 +44,6 @@ const checkUniqueEmail = async (email: string) => {
       id: true,
     },
   });
-
   return !Boolean(user);
 };
 
@@ -84,9 +88,25 @@ export async function createAccount(prevState: any, formData: FormData) {
   if (!result.success) {
     return result.error.flatten();
   } else {
-    // hash password
-    // save the user to db
+    const hashedPassword = await bcrypt.hash(result.data.password, 12);
+    const user = await db.user.create({
+      data: {
+        username: result.data.username,
+        email: result.data.email,
+        password: hashedPassword,
+      },
+      select: {
+        id: true,
+      },
+    });
     // log the user in
-    // redirect "/home"
+    const cookie = await getIronSession(cookies(), {
+      cookieName: process.env.COOKIE_NAME!,
+      password: process.env.COOKIE_PASSWORD!,
+    });
+    //@ts-ignore
+    cookie.id = user.id;
+    await cookie.save();
+    redirect("/profile");
   }
 }
