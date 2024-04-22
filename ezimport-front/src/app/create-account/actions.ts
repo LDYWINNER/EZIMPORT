@@ -14,12 +14,7 @@ const formSchema = z
         required_error: "Where is my username???",
       })
       .trim()
-      .toLowerCase()
-      .transform((username) => `🔥 ${username}`)
-      .refine(
-        (username) => !username.includes("potato"),
-        "No potatoes allowed!"
-      ),
+      .toLowerCase(),
     email: z.string().email().toLowerCase(),
     password: z
       .string()
