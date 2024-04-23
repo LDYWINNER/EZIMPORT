@@ -10,6 +10,8 @@ const publicOnlyUrls: Routes = {
   "/login": true,
   "/sms": true,
   "/create-account": true,
+  "/kakao/start": true,
+  "/kakao/complete": true,
 };
 
 export async function middleware(request: NextRequest) {
