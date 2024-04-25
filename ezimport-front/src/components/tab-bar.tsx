@@ -110,6 +110,20 @@ export default async function TabBar({
                 <LineChart className="h-4 w-4" />
                 Analytics
               </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <LineChart className="h-4 w-4" />
+                Bulletin Board
+              </Link>
+              <Link
+                href="/profile"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <LineChart className="h-4 w-4" />
+                My profile
+              </Link>
             </nav>
           </div>
         </div>
@@ -173,6 +187,20 @@ export default async function TabBar({
                 >
                   <LineChart className="h-5 w-5" />
                   Analytics
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                >
+                  <LineChart className="h-4 w-4" />
+                  Bulletin Board
+                </Link>
+                <Link
+                  href="/profile"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                >
+                  <LineChart className="h-4 w-4" />
+                  My profile
                 </Link>
               </nav>
             </SheetContent>
