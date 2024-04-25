@@ -24,8 +24,38 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import db from "@/lib/db";
+import getSession from "@/lib/session";
+import { notFound, redirect } from "next/navigation";
 
-export default function TabBar({ children }: { children: React.ReactNode }) {
+async function getUser() {
+  const session = await getSession();
+  if (session.id) {
+    const user = await db.user.findUnique({
+      where: {
+        id: session.id,
+      },
+    });
+    if (user) {
+      return user;
+    }
+  }
+  notFound();
+}
+
+export default async function TabBar({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const user = await getUser();
+  const logOut = async () => {
+    "use server";
+    const session = await getSession();
+    await session.destroy();
+    redirect("/");
+  };
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -174,7 +204,11 @@ export default function TabBar({ children }: { children: React.ReactNode }) {
               </Link>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem>
+                <form action={logOut}>
+                  <button>Log out</button>
+                </form>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
