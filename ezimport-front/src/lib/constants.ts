@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 export const PASSWORD_MIN_LENGTH = 4;
 // including at least one uppercase letter, one lowercase letter, one number and one special character
 export const PASSWORD_REGEX = new RegExp(
