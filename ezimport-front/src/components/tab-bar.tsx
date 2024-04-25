@@ -9,7 +9,8 @@ import {
   Package2,
   Search,
   ShoppingCart,
-  Users,
+  User,
+  Pencil,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -78,50 +79,36 @@ export default async function TabBar({
               >
                 <Home className="h-4 w-4" />
                 Dashboard
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <ShoppingCart className="h-4 w-4" />
-                Orders
                 <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                   6
                 </Badge>
               </Link>
               <Link
-                href="#"
+                href="/products"
                 className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
               >
                 <Package className="h-4 w-4" />
                 Products
               </Link>
               <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <Users className="h-4 w-4" />
-                Customers
-              </Link>
-              <Link
-                href="#"
+                href="/analytics"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
                 <LineChart className="h-4 w-4" />
                 Analytics
               </Link>
               <Link
-                href="#"
+                href="/bulletin-board"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
-                <LineChart className="h-4 w-4" />
+                <Pencil className="h-4 w-4" />
                 Bulletin Board
               </Link>
               <Link
                 href="/profile"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
-                <LineChart className="h-4 w-4" />
+                <User className="h-4 w-4" />
                 My profile
               </Link>
             </nav>
@@ -151,55 +138,38 @@ export default async function TabBar({
                   <span className="sr-only">Temp EzImport</span>
                 </Link>
                 <Link
-                  href="#"
+                  href="/dash-board"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Home className="h-5 w-5" />
                   Dashboard
                 </Link>
                 <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  Orders
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
-                  </Badge>
-                </Link>
-                <Link
-                  href="#"
+                  href="/products"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Package className="h-5 w-5" />
                   Products
                 </Link>
                 <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Users className="h-5 w-5" />
-                  Customers
-                </Link>
-                <Link
-                  href="#"
+                  href="/analytics"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <LineChart className="h-5 w-5" />
                   Analytics
                 </Link>
                 <Link
-                  href="#"
+                  href="/bulletin-board"
                   className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                 >
-                  <LineChart className="h-4 w-4" />
+                  <Pencil className="h-4 w-4" />
                   Bulletin Board
                 </Link>
                 <Link
                   href="/profile"
                   className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                 >
-                  <LineChart className="h-4 w-4" />
+                  <User className="h-5 w-5" />
                   My profile
                 </Link>
               </nav>
