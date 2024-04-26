@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  ChevronDownIcon,
   File,
   ListFilter,
   MoreHorizontal,
@@ -54,18 +55,34 @@ export default function Dashboard() {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="#">Dashboard</Link>
+                <Link href="/products">크롤링 기능 제공 웹사이트 목록</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="#">Products</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>All Products</BreadcrumbPage>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-1">
+                  오플
+                  <ChevronDownIcon />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  <DropdownMenuItem>
+                    <BreadcrumbLink asChild>
+                      <Link href="#">오플</Link>
+                    </BreadcrumbLink>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <BreadcrumbLink asChild>
+                      <Link href="#">아이허브</Link>
+                    </BreadcrumbLink>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <BreadcrumbLink asChild>
+                      <Link href="#">Rakuten</Link>
+                    </BreadcrumbLink>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -82,33 +99,10 @@ export default function Dashboard() {
         <Tabs defaultValue="all">
           <div className="flex items-center">
             <TabsList>
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="active">Active</TabsTrigger>
-              <TabsTrigger value="draft">Draft</TabsTrigger>
-              <TabsTrigger value="archived" className="hidden sm:flex">
-                Archived
-              </TabsTrigger>
+              <TabsTrigger value="all">모든 상품</TabsTrigger>
+              <TabsTrigger value="active">품절 제외</TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="h-7 gap-1">
-                    <ListFilter className="h-3.5 w-3.5" />
-                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Filter
-                    </span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Filter by</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuCheckboxItem checked>
-                    Active
-                  </DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem>Archived</DropdownMenuCheckboxItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
               <Button size="sm" variant="outline" className="h-7 gap-1">
                 <File className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -126,9 +120,9 @@ export default function Dashboard() {
           <TabsContent value="all">
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
-                <CardTitle>Products</CardTitle>
+                <CardTitle>오플 상품들</CardTitle>
                 <CardDescription>
-                  Manage your products and view their sales performance.
+                  마지막 크롤링 날짜: 2023-07-12 10:42 AM
                 </CardDescription>
               </CardHeader>
               <CardContent>
