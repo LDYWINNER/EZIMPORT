@@ -44,7 +44,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useTheme } from "next-themes";
 import { Article } from "@/types";
 import { Database, db } from "@/service/firebase";
 
@@ -60,8 +59,6 @@ const getProducts = async (website: string) => {
 };
 
 export default async function Dashboard() {
-  const { theme } = useTheme();
-
   const products = await getProducts("ople");
 
   return (
@@ -107,21 +104,13 @@ export default async function Dashboard() {
               <TabsTrigger value="active">품절 제외</TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "outline" : "default"}
-                className="h-7 gap-1"
-              >
+              <Button size="sm" variant={"outline"} className="h-7 gap-1">
                 <File className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                   엑셀로 내보내기
                 </span>
               </Button>
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "outline" : "default"}
-                className="h-7 gap-1"
-              >
+              <Button size="sm" variant={"outline"} className="h-7 gap-1">
                 <PlusCircle className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                   다시 크롤링하기
