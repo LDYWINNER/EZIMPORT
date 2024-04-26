@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Bell,
@@ -8,7 +10,6 @@ import {
   Package,
   Package2,
   Search,
-  ShoppingCart,
   User,
   Pencil,
 } from "lucide-react";
@@ -25,44 +26,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import db from "@/lib/db";
-import getSession from "@/lib/session";
-import { notFound, redirect } from "next/navigation";
-
-async function getUser() {
-  const session = await getSession();
-  if (session.id) {
-    const user = await db.user.findUnique({
-      where: {
-        id: session.id,
-      },
-    });
-    if (user) {
-      return user;
-    }
-  }
-  notFound();
-}
+import { logOut } from "@/lib/auth";
 
 export default async function TabBar({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getUser();
-  const logOut = async () => {
-    "use server";
-    const session = await getSession();
-    await session.destroy();
-    redirect("/");
-  };
-
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-            <Link href="/" className="flex items-center gap-2 font-semibold">
+            <Link
+              href="/dash-board"
+              className="flex items-center gap-2 font-semibold"
+            >
               <Package2 className="h-6 w-6" />
               <span className="">Temp EzImport</span>
             </Link>
