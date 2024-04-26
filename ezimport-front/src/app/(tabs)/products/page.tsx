@@ -8,10 +8,11 @@ async function getProducts() {
 
 export const boards = [
   {
+    id: "ople",
     name: "오플",
   },
-  { name: "아이허브" },
-  { name: "Rakuten" },
+  { id: "iherb", name: "아이허브" },
+  { id: "rakuten", name: "Rakuten" },
 ];
 
 export default async function Products() {
@@ -28,7 +29,7 @@ export default async function Products() {
       <div className="flex gap-3">
         {boards.map((board, index) => (
           <>
-            <Link href="" key={index}>
+            <Link href={`/products/${board.id}`} key={index}>
               <div className="h-[175px] w-[250px] rounded-xl bg-neutral-600">
                 <h3>{board.name}</h3>
               </div>
