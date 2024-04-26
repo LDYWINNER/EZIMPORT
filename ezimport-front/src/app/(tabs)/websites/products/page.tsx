@@ -45,9 +45,18 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 
-export default function Dashboard() {
+async function getProducts() {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return [];
+}
+
+export default async function Dashboard() {
   const pathname = usePathname();
+  const { theme } = useTheme();
+
+  const products = await getProducts();
 
   return (
     <div className="flex flex-col sm:gap-4 sm:py-4">
@@ -92,16 +101,24 @@ export default function Dashboard() {
               <TabsTrigger value="active">품절 제외</TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
-              <Button size="sm" variant="outline" className="h-7 gap-1">
+              <Button
+                size="sm"
+                variant={theme === "dark" ? "outline" : "default"}
+                className="h-7 gap-1"
+              >
                 <File className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                  Export
+                  엑셀로 내보내기
                 </span>
               </Button>
-              <Button size="sm" className="h-7 gap-1">
+              <Button
+                size="sm"
+                variant={theme === "dark" ? "outline" : "default"}
+                className="h-7 gap-1"
+              >
                 <PlusCircle className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                  Add Product
+                  다시 크롤링하기
                 </span>
               </Button>
             </div>
@@ -110,9 +127,14 @@ export default function Dashboard() {
           <TabsContent value="all">
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
-                <CardTitle>오플 상품들</CardTitle>
+                <CardTitle className="mb-3">오플 상품들</CardTitle>
                 <CardDescription>
                   마지막 크롤링 날짜: 2023-07-12 10:42 AM
+                </CardDescription>
+                <CardDescription>
+                  <Link href={"https://www.ople.com/mall5/"}>
+                    https://www.ople.com/mall5/
+                  </Link>
                 </CardDescription>
               </CardHeader>
               <CardContent>

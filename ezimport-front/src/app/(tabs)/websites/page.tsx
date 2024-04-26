@@ -1,23 +1,16 @@
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 
-async function getProducts() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  return boards;
-}
-
 export const boards = [
   {
     id: "ople",
     name: "오플",
   },
   { id: "iherb", name: "아이허브" },
-  { id: "rakuten", name: "Rakuten" },
+  { id: "rakuten", name: "라쿠텐" },
 ];
 
 export default async function Products() {
-  const products = await getProducts();
-
   return (
     <>
       <div className="flex items-center mt-3">
