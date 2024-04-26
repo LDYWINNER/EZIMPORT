@@ -29,7 +29,7 @@ export const scheduleFunctionCronTab = functions
     memory: "2GB",
     timeoutSeconds: 120,
   })
-  .pubsub.schedule("* 3 * * *")
+  .pubsub.schedule("0 3 * * *")
   .timeZone("Asia/Seoul")
   .onRun(async () => {
     functions.logger.info("Start Crawler", { structuredData: true });
