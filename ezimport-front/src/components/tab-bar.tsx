@@ -28,7 +28,7 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { logOut } from "@/lib/auth";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { DarkModeToggle } from "./DarkModeToggle";
 
 export default async function TabBar({
   children,
@@ -190,6 +190,7 @@ export default async function TabBar({
               </div>
             </form>
           </div>
+          <DarkModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
