@@ -71,9 +71,9 @@ export default async function TabBar({
                 </Badge>
               </Link>
               <Link
-                href="/products"
+                href="/websites"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
-                  pathname.includes("products")
+                  pathname.includes("websites")
                     ? "bg-muted text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
@@ -148,7 +148,7 @@ export default async function TabBar({
                   Dashboard
                 </Link>
                 <Link
-                  href="/products"
+                  href="/websites"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Package className="h-5 w-5" />

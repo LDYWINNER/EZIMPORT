@@ -1,9 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
   ChevronDownIcon,
   File,
-  ListFilter,
   MoreHorizontal,
   PlusCircle,
   Search,
@@ -15,7 +16,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
@@ -29,11 +29,9 @@ import {
 } from "@/components/ui/card";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
@@ -46,8 +44,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { usePathname } from "next/navigation";
 
 export default function Dashboard() {
+  const pathname = usePathname();
+
   return (
     <div className="flex flex-col sm:gap-4 sm:py-4">
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -55,7 +56,7 @@ export default function Dashboard() {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/products">크롤링 기능 제공 웹사이트 목록</Link>
+                <Link href="/websites">크롤링 기능 제공 웹사이트 목록</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
@@ -66,21 +67,9 @@ export default function Dashboard() {
                   <ChevronDownIcon />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start">
-                  <DropdownMenuItem>
-                    <BreadcrumbLink asChild>
-                      <Link href="#">오플</Link>
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <BreadcrumbLink asChild>
-                      <Link href="#">아이허브</Link>
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <BreadcrumbLink asChild>
-                      <Link href="#">Rakuten</Link>
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
+                  <DropdownMenuItem>오플</DropdownMenuItem>
+                  <DropdownMenuItem>아이허브</DropdownMenuItem>
+                  <DropdownMenuItem>Rakuten</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </BreadcrumbItem>
@@ -117,6 +106,7 @@ export default function Dashboard() {
               </Button>
             </div>
           </div>
+
           <TabsContent value="all">
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
