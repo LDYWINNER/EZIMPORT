@@ -59,7 +59,7 @@ export default async function TabBar({
               <Link
                 href="/dash-board"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
-                  pathname === "/dash-board"
+                  pathname.includes("dash-board")
                     ? "bg-muted text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
@@ -73,7 +73,7 @@ export default async function TabBar({
               <Link
                 href="/products"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
-                  pathname === "/products"
+                  pathname.includes("products")
                     ? "bg-muted text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
@@ -84,7 +84,7 @@ export default async function TabBar({
               <Link
                 href="/analytics"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
-                  pathname === "/analytics"
+                  pathname.includes("analytics")
                     ? "bg-muted text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
@@ -95,7 +95,7 @@ export default async function TabBar({
               <Link
                 href="/bulletin-board"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
-                  pathname === "/bulletin-board"
+                  pathname.includes("bulletin-board")
                     ? "bg-muted text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
@@ -106,7 +106,7 @@ export default async function TabBar({
               <Link
                 href="/profile"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
-                  pathname === "/profile"
+                  pathname.includes("profile")
                     ? "bg-muted text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
