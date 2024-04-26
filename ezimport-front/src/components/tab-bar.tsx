@@ -27,12 +27,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { logOut } from "@/lib/auth";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export default async function TabBar({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -54,7 +58,11 @@ export default async function TabBar({
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               <Link
                 href="/dash-board"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                  pathname === "/dash-board"
+                    ? "bg-muted text-primary"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
               >
                 <Home className="h-4 w-4" />
                 Dashboard
@@ -64,28 +72,44 @@ export default async function TabBar({
               </Link>
               <Link
                 href="/products"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                  pathname === "/products"
+                    ? "bg-muted text-primary"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
               >
                 <Package className="h-4 w-4" />
                 Products
               </Link>
               <Link
                 href="/analytics"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                  pathname === "/analytics"
+                    ? "bg-muted text-primary"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
               >
                 <LineChart className="h-4 w-4" />
                 Analytics
               </Link>
               <Link
                 href="/bulletin-board"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                  pathname === "/bulletin-board"
+                    ? "bg-muted text-primary"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
               >
                 <Pencil className="h-4 w-4" />
                 Bulletin Board
               </Link>
               <Link
                 href="/profile"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                  pathname === "/profile"
+                    ? "bg-muted text-primary"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
               >
                 <User className="h-4 w-4" />
                 My profile
