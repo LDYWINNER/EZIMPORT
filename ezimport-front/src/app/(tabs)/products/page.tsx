@@ -1,24 +1,41 @@
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
-export default function Products() {
+async function getProducts() {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return boards;
+}
+
+export const boards = [
+  {
+    name: "오플",
+  },
+  { name: "아이허브" },
+  { name: "Rakuten" },
+];
+
+export default async function Products() {
+  const products = await getProducts();
+
   return (
     <>
-      <div className="flex items-center">
-        <h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
+      <div className="flex items-center mt-3">
+        <h1 className="text-lg font-semibold md:text-2xl">
+          크롤링 기능 제공 웹사이트 목록
+        </h1>
       </div>
-      <div
-        className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-        x-chunk="dashboard-02-chunk-1"
-      >
-        <div className="flex flex-col items-center gap-1 text-center">
-          <h3 className="text-2xl font-bold tracking-tight">
-            You have no products
-          </h3>
-          <p className="text-sm text-muted-foreground">
-            You can start selling as soon as you add a product.
-          </p>
-          <Button className="mt-4">Add Product</Button>
-        </div>
+      <Separator className="my-3" />
+      <div className="flex gap-3">
+        {boards.map((board, index) => (
+          <>
+            <Link href="" key={index}>
+              <div className="h-[175px] w-[250px] rounded-xl bg-neutral-600">
+                <h3>{board.name}</h3>
+              </div>
+            </Link>
+            <Separator orientation="vertical" />
+          </>
+        ))}
       </div>
     </>
   );
