@@ -44,19 +44,25 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
+import { Article } from "@/types";
+import { Database, db } from "@/service/firebase";
 
-async function getProducts() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  return [];
-}
+const getProducts = async (website: string) => {
+  const database = new Database(db);
+  const products: Article[] = await database.getAllData("articles");
+
+  if (!products) {
+    return { products: [] };
+  }
+
+  return products;
+};
 
 export default async function Dashboard() {
-  const pathname = usePathname();
   const { theme } = useTheme();
 
-  const products = await getProducts();
+  const products = await getProducts("ople");
 
   return (
     <div className="flex flex-col sm:gap-4 sm:py-4">
@@ -127,7 +133,7 @@ export default async function Dashboard() {
           <TabsContent value="all">
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
-                <CardTitle className="mb-3">오플 상품들</CardTitle>
+                <CardTitle className="mb-3">오플 상품</CardTitle>
                 <CardDescription>
                   마지막 크롤링 날짜: 2023-07-12 10:42 AM
                 </CardDescription>
