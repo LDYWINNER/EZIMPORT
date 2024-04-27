@@ -54,7 +54,7 @@ const getProducts = async (website: string) => {
   if (!products) {
     return { products: [] };
   }
-
+  console.log(products);
   return products;
 };
 
