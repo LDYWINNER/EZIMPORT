@@ -45,11 +45,9 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Article } from "@/types";
-import { Database, db } from "@/service/firebase";
 
 const getProducts = async (website: string) => {
-  const database = new Database(db);
-  const products: Article[] = await database.getAllData("articles");
+  const products: never[] = [];
 
   if (!products) {
     return { products: [] };
