@@ -15,9 +15,11 @@ model User {
   password   String?
   phone      String?    @unique
   avatar     String?
+  kakao_id   String?    @unique
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt
   SMSToken   SMSToken[]
+  crawling_records CrawlingRecord?
 }
 
 model SMSToken {
@@ -27,4 +29,15 @@ model SMSToken {
   updated_at DateTime @updatedAt
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     Int
+}
+
+model CrawlingRecord {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     Int      @unique
+  ople       String?
+  iherb      String?
+  rakuten    String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
