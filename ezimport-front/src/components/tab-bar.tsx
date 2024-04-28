@@ -78,17 +78,6 @@ export default function TabBar({ children }: { children: React.ReactNode }) {
                 Products
               </Link>
               <Link
-                href="/analytics"
-                className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
-                  pathname.includes("analytics")
-                    ? "bg-muted text-primary"
-                    : "text-muted-foreground hover:text-primary"
-                }`}
-              >
-                <LineChart className="h-4 w-4" />
-                Analytics
-              </Link>
-              <Link
                 href="/bulletin-board"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
                   pathname.includes("bulletin-board")
@@ -98,6 +87,17 @@ export default function TabBar({ children }: { children: React.ReactNode }) {
               >
                 <Pencil className="h-4 w-4" />
                 Bulletin Board
+              </Link>
+              <Link
+                href="/analytics"
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                  pathname.includes("analytics")
+                    ? "bg-muted text-primary"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
+              >
+                <LineChart className="h-4 w-4" />
+                Analytics
               </Link>
               <Link
                 href="/profile"
