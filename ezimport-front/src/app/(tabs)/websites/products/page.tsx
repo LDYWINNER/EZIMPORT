@@ -1,13 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ChevronDownIcon,
-  File,
-  MoreHorizontal,
-  PlusCircle,
-  Search,
-} from "lucide-react";
-
+import { MoreHorizontal, PlusCircle, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
@@ -43,19 +36,7 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const getProducts = async (website: string) => {
-  const products: never[] = [];
-
-  if (!products) {
-    return { products: [] };
-  }
-  console.log(products);
-  return products;
-};
-
 export default async function Dashboard() {
-  const products = await getProducts("ople");
-
   return (
     <div className="flex flex-col sm:gap-4 sm:py-4">
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -68,17 +49,13 @@ export default async function Dashboard() {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-1">
-                  오플
-                  <ChevronDownIcon />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                  <DropdownMenuItem>오플</DropdownMenuItem>
-                  <DropdownMenuItem>아이허브</DropdownMenuItem>
-                  <DropdownMenuItem>Rakuten</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <BreadcrumbLink asChild>
+                <Link href="/websites/urls">크롤링 url 설정</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <Link href="#">크롤링 결과</Link>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -99,18 +76,24 @@ export default async function Dashboard() {
               <TabsTrigger value="active">품절 제외</TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
-              <Button size="sm" variant={"outline"} className="h-7 gap-1">
+              {/* <Button size="sm" variant={"outline"} className="h-7 gap-1">
                 <File className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                   엑셀로 내보내기
                 </span>
-              </Button>
-              <Button size="sm" variant={"outline"} className="h-7 gap-1">
-                <PlusCircle className="h-3.5 w-3.5" />
-                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                  다시 크롤링하기
-                </span>
-              </Button>
+              </Button> */}
+              <Link href={"/websites/urls"}>
+                <Button
+                  size="sm"
+                  variant={"outline"}
+                  className="h-7 gap-1 text-white"
+                >
+                  <PlusCircle className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    다시 크롤링하기
+                  </span>
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -118,14 +101,7 @@ export default async function Dashboard() {
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
                 <CardTitle className="mb-3">오플 상품</CardTitle>
-                <CardDescription>
-                  마지막 크롤링 날짜: 2023-07-12 10:42 AM
-                </CardDescription>
-                <CardDescription>
-                  <Link href={"https://www.ople.com/mall5/"}>
-                    https://www.ople.com/mall5/
-                  </Link>
-                </CardDescription>
+                <CardDescription>크롤링 에러 발생 url들:</CardDescription>
               </CardHeader>
               <CardContent>
                 <Table>
