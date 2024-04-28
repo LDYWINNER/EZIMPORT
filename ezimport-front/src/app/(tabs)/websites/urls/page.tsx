@@ -33,7 +33,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 
 export default async function Urls() {
@@ -95,7 +94,6 @@ export default async function Urls() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            =
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label htmlFor="email">Email</Label>
               <Input type="email" id="email" placeholder="Email" />
