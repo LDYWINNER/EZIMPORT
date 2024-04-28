@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
 export const boards = [
   {
     id: "ople",
-    name: "오플",
+    name: "Ople.com",
   },
   { id: "iherb", name: "아이허브" },
   { id: "rakuten", name: "라쿠텐" },
@@ -21,14 +22,14 @@ export default async function Products() {
       <Separator className="my-3" />
       <div className="flex gap-3">
         {boards.map((board, index) => (
-          <>
-            <Link href={`/websites/products`} key={index}>
-              <div className="h-[175px] w-[250px] rounded-xl bg-neutral-600">
-                <h3>{board.name}</h3>
-              </div>
+          <div key={index} className="flex">
+            <Link href={`/websites/products`}>
+              <Button className="h-[175px] w-[250px] rounded-xl text-white bg-blue-700 hover:bg-blue-800 font-medium text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <h3 className="">{board.name}</h3>
+              </Button>
             </Link>
             <Separator orientation="vertical" />
-          </>
+          </div>
         ))}
       </div>
     </>
