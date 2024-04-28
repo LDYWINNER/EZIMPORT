@@ -30,11 +30,7 @@ import { logOut } from "@/lib/auth";
 import { usePathname } from "next/navigation";
 import { DarkModeToggle } from "./DarkModeToggle";
 
-export default async function TabBar({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function TabBar({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
