@@ -147,12 +147,12 @@ export default async function Urls() {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="urls_in_text">
+                        <Label htmlFor="urls_from_file">
                           크롤링할 url 파일 내용 미리보기
                         </Label>
                         <Textarea
-                          id="urls_in_text"
-                          name="urls_in_text"
+                          id="urls_from_file"
+                          name="urls_from_file"
                           className="min-h-32"
                           value={fileContent}
                           readOnly

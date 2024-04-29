@@ -12,58 +12,71 @@ export async function crawlAndDownload(formData: FormData) {
   const data = {
     name: formData.get("name"),
     urls_in_text: formData.get("urls_in_text"),
-    url_file: formData.get("url_file"),
+    urls_from_file: formData.get("urls_from_file"),
   };
   console.log(data);
+
+  // for (const path of (data!.urls_from_file! as string).split("\n")) {
+  //   console.log(path);
+  // }
 
   // crawl
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  const urls = fs
-    .readFileSync(data.url_file, "utf8")
-    .split("\n")
-    .map((line) => line.trim());
   const excelData: Array<Array<string>> = [["품명", "품절 사이즈"]];
+  const urls_in_text = (data.urls_in_text as string).split("\n");
+  const urls_from_file = (data.urls_from_file as string).split("\n");
+  const urls = urls_in_text.concat(urls_from_file);
 
   for (const path of urls) {
-    await page.goto(path);
-    await page.waitForTimeout(TM);
+    console.log("path:", path); // Just for checking
 
-    console.log(path); // Just for checking
+    try {
+      await page.goto(path);
+      await page.waitForSelector(".normal_reserve_item_name", {
+        visible: true,
+      });
 
-    const name = await page.$eval(
-      ".normal_reserve_item_name",
-      (elem) => elem.textContent || ""
-    );
-    const sizeButtons = await page.$$eval(".grid-element--1c5t6", (elements) =>
-      elements
-        .map((e) => e.textContent?.trim() || "")
-        .filter((text) => text.includes("売り切れ"))
-    );
+      const name = await page.$eval(
+        ".normal_reserve_item_name",
+        (elem) => elem.textContent || ""
+      );
+      const sizeButtons = await page.$$eval(
+        ".grid-element--1c5t6",
+        (elements) =>
+          elements
+            .map((e) => e.textContent?.trim() || "")
+            .filter((text) => text.includes("売り切れ"))
+      );
 
-    let outOfStockSizes = sizeButtons
-      .map((text) => text.split(/\s+/)[0])
-      .join(" ");
+      let outOfStockSizes = sizeButtons
+        .map((text) => text.split(/\s+/)[0])
+        .join(" ");
 
-    excelData.push([name, outOfStockSizes]);
+      console.log(name, outOfStockSizes); // Just for checking
+
+      excelData.push([name, outOfStockSizes]);
+    } catch (error) {
+      console.log(error);
+      continue;
+    }
   }
 
   await browser.close();
 
-  const nowDatetime = format(new Date(), " MM-dd HHmm");
-  const fileName = "result_details" + nowDatetime + ".xlsx";
-  const workbook = new ExcelJS.Workbook();
-  const worksheet = workbook.addWorksheet();
-
-  excelData.forEach((data, rowIndex) => {
-    worksheet.addRow(data);
-  });
-
-  await workbook.xlsx.writeFile(fileName);
-  console.log(`Saved data to ${fileName}`);
-
   // download excel file
+  // const nowDatetime = format(new Date(), " MM-dd HHmm");
+  // const fileName = "result_details" + nowDatetime + ".xlsx";
+  // const workbook = new ExcelJS.Workbook();
+  // const worksheet = workbook.addWorksheet();
+
+  // excelData.forEach((data, rowIndex) => {
+  //   worksheet.addRow(data);
+  // });
+
+  // await workbook.xlsx.writeFile(fileName);
+  // console.log(`Saved data to ${fileName}`);
 
   // send crawl result to /products page to show
   redirect("/websites/products");
