@@ -119,8 +119,12 @@ export default async function Urls() {
                               <div className="space-y-1">
                                 <h4 className="text-sm font-semibold">예시</h4>
                                 <p className="text-sm">
-                                  https://www.ople.com/mall5/shop/item.php?it_id=123456,https://www.ople.com/mall5/shop/item.php?it_id=123457,...
+                                  https://www.ople.com/mall5/shop/item.php?it_id=123456
                                 </p>
+                                <p className="text-sm">
+                                  https://www.ople.com/mall5/shop/item.php?it_id=123457
+                                </p>
+                                <p className="text-sm">...</p>
                               </div>
                             </div>
                           </HoverCardContent>
