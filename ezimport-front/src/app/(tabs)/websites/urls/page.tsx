@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Breadcrumb,
@@ -31,8 +33,22 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { crawlAndDownload } from "./actions";
+import { useState } from "react";
 
 export default async function Urls() {
+  const [fileContent, setFileContent] = useState("");
+
+  const handleFileRead = (event: any) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        setFileContent(e.target.result);
+      };
+      reader.readAsText(file);
+    }
+  };
+
   return (
     <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -123,7 +139,24 @@ export default async function Urls() {
                           크롤링할 url 파일로 제출하기 (한 줄에 하나의 url이
                           입력되어 있는 txt 파일 제출)
                         </Label>
-                        <Input id="url_file" name="url_file" type="file" />
+                        <Input
+                          id="url_file"
+                          name="url_file"
+                          type="file"
+                          onChange={handleFileRead}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="urls_in_text">
+                          크롤링할 url 파일 내용 미리보기
+                        </Label>
+                        <Textarea
+                          id="urls_in_text"
+                          name="urls_in_text"
+                          className="min-h-32"
+                          value={fileContent}
+                          readOnly
+                        />
                       </div>
                     </div>
                   </CardContent>
