@@ -29,9 +29,19 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useDataStore from "@/app/store/useDataStore";
+import { exportExcel } from "@/actions/exportExcel";
 
 export default async function Dashboard() {
   const { excelData } = useDataStore();
+
+  const exportProducts = async () => {
+    try {
+      await exportExcel(excelData!.data);
+      alert("Exported");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex flex-col sm:gap-4 sm:py-4">
@@ -72,7 +82,12 @@ export default async function Dashboard() {
               <TabsTrigger value="active">품절 제외</TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
-              <Button size="sm" variant={"outline"} className="h-7 gap-1">
+              <Button
+                size="sm"
+                variant={"outline"}
+                className="h-7 gap-1"
+                onClick={exportProducts}
+              >
                 <File className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                   엑셀로 내보내기

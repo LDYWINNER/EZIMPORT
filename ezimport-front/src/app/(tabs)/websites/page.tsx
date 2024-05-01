@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 
-export const boards = [
+export const websites_for_crawling = [
   {
     id: "ople",
     name: "Ople.com",
@@ -22,7 +22,7 @@ export default async function Products() {
       </div>
       <Separator className="my-3" />
       <div className="flex flex-col gap-3">
-        {boards.map((board, index) => (
+        {websites_for_crawling.map((board, index) => (
           <div key={index}>
             <Link href={`/websites/urls`}>
               <div className="flex gap-5">
