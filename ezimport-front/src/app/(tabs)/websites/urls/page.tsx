@@ -36,10 +36,11 @@ import { useState } from "react";
 import { crawlAndDownload } from "@/actions/crawl";
 import useDataStore from "@/app/store/useDataStore";
 import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 export default async function Urls() {
   const [fileContent, setFileContent] = useState("");
-  const { excelData, setExcelData } = useDataStore();
+  const { setExcelData } = useDataStore();
 
   const handleFileRead = (event: any) => {
     const file = event.target.files[0];
@@ -79,14 +80,16 @@ export default async function Urls() {
     formData.append("status", status);
 
     const response = await crawlAndDownload(formData);
-    console.log(response);
     setExcelData(response);
-    console.log(excelData);
 
     redirect("/websites/products");
   };
 
   const onValid = async () => {
+    toast.success(
+      "크롤링이 시작되었습니다. 크롤링이 완료되면 크롤링 결과 페이지에서 다운로드 받으실 수 있습니다. 그 전까진 페이지를 닫거나 조작하지 말아주세요.",
+      { duration: 5000 }
+    );
     await onSubmit();
   };
 
