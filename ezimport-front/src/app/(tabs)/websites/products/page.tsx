@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { PlusCircle, Search } from "lucide-react";
+import { PlusCircle, Search, File } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -72,12 +72,12 @@ export default async function Dashboard() {
               <TabsTrigger value="active">품절 제외</TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
-              {/* <Button size="sm" variant={"outline"} className="h-7 gap-1">
+              <Button size="sm" variant={"outline"} className="h-7 gap-1">
                 <File className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                   엑셀로 내보내기
                 </span>
-              </Button> */}
+              </Button>
               <Link href={"/websites/urls"}>
                 <Button
                   size="sm"
