@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import puppeteer from "puppeteer";
 import ExcelJS from "exceljs";
 import fs from "fs";
@@ -13,6 +12,7 @@ export async function crawlAndDownload(formData: FormData) {
     name: formData.get("name"),
     urls_in_text: formData.get("urls_in_text"),
     urls_from_file: formData.get("urls_from_file"),
+    status: formData.get("status"),
   };
   console.log(data);
 
@@ -25,8 +25,8 @@ export async function crawlAndDownload(formData: FormData) {
   const page = await browser.newPage();
 
   const excelData: Array<Array<string>> = [["품명", "품절 사이즈"]];
-  const urls_in_text = (data.urls_in_text as string).split("\n");
-  const urls_from_file = (data.urls_from_file as string).split("\n");
+  const urls_in_text = (data.urls_in_text as string).split("\n") || [];
+  const urls_from_file = (data.urls_from_file as string).split("\n") || [];
   const urls = urls_in_text.concat(urls_from_file);
 
   for (const path of urls) {
@@ -54,30 +54,34 @@ export async function crawlAndDownload(formData: FormData) {
         .map((text) => text.split(/\s+/)[0])
         .join(" ");
 
-      console.log(name, outOfStockSizes); // Just for checking
+      // console.log(name, outOfStockSizes); // Just for checking
 
       excelData.push([name, outOfStockSizes]);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       continue;
     }
   }
 
-  await browser.close();
-
-  // download excel file
-  // const nowDatetime = format(new Date(), " MM-dd HHmm");
-  // const fileName = "result_details" + nowDatetime + ".xlsx";
-  // const workbook = new ExcelJS.Workbook();
-  // const worksheet = workbook.addWorksheet();
-
-  // excelData.forEach((data, rowIndex) => {
-  //   worksheet.addRow(data);
-  // });
-
-  // await workbook.xlsx.writeFile(fileName);
-  // console.log(`Saved data to ${fileName}`);
-
-  // send crawl result to /products page to show
-  redirect("/websites/products");
+  console.log(excelData);
+  return {
+    data: excelData,
+  };
+  // redirect("/websites/products");
 }
+
+// download excel file
+// const nowDatetime = format(new Date(), " MM-dd HHmm");
+// const fileName = "result_details" + nowDatetime + ".xlsx";
+// const workbook = new ExcelJS.Workbook();
+// const worksheet = workbook.addWorksheet();
+
+// excelData.forEach((data, rowIndex) => {
+//   worksheet.addRow(data);
+// });
+
+// await workbook.xlsx.writeFile(fileName);
+// console.log(`Saved data to ${fileName}`);
+
+// 결과값:
+/* {"data":[["품명","품절 사이즈"],["コンバース オールスター (R) トレックウエーブ Ｚ ＨＩ CONVERSE ALL STAR (R) TREKWAVE Z HI 31310810 31310811 メンズ レディース スニーカー","US3.0(22.0cm)売り切れ US3.5(22.5cm)売り切れ US6.5(25.0cm)売り切れ"]]} */

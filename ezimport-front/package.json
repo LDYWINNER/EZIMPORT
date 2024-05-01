@@ -48,7 +48,8 @@
     "tailwindcss-animate": "^1.0.7",
     "twilio": "^5.0.4",
     "validator": "^13.11.0",
-    "zod": "^3.22.5"
+    "zod": "^3.22.5",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",

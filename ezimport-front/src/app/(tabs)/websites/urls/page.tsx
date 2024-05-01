@@ -32,11 +32,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { crawlAndDownload } from "./actions";
 import { useState } from "react";
+import { crawlAndDownload } from "@/actions/crawl";
+import useDataStore from "@/app/store/useDataStore";
+import { redirect } from "next/navigation";
 
 export default async function Urls() {
   const [fileContent, setFileContent] = useState("");
+  const { excelData, setExcelData } = useDataStore();
 
   const handleFileRead = (event: any) => {
     const file = event.target.files[0];
@@ -47,6 +50,44 @@ export default async function Urls() {
       };
       reader.readAsText(file);
     }
+  };
+
+  const onSubmit = async () => {
+    const name = (document.getElementById("name") as HTMLInputElement).value;
+    const urlsInText = (
+      document.getElementById("urls_in_text") as HTMLInputElement
+    ).value;
+    const urlsFromFile = fileContent;
+    const status = (document.getElementById("status") as HTMLSelectElement)
+      .value;
+
+    console.log("name", name);
+    console.log("urlsInText", urlsInText);
+    console.log("urlsFromFile", urlsFromFile);
+    console.log("status", status);
+
+    const urls = urlsInText || urlsFromFile;
+    if (!urls) {
+      alert("크롤링할 url을 입력해주세요.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("urls_in_text", urlsInText);
+    formData.append("urls_from_file", urlsFromFile);
+    formData.append("status", status);
+
+    const response = await crawlAndDownload(formData);
+    console.log(response);
+    setExcelData(response);
+    console.log(excelData);
+
+    redirect("/websites/products");
+  };
+
+  const onValid = async () => {
+    await onSubmit();
   };
 
   return (
@@ -69,7 +110,7 @@ export default async function Urls() {
         </Breadcrumb>
       </header>
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-        <form action={crawlAndDownload}>
+        <form action={onValid}>
           <div className="mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4">
             <div className="flex items-center gap-4">
               <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0 ml-1">
