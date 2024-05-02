@@ -11,6 +11,7 @@ export default async function setupPuppeteer() {
     ignoreHTTPSErrors: true,
   });
 
+  console.log("Chromium path:", await chromium.executablePath());
   return browser;
 }
 

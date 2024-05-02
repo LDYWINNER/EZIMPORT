@@ -37,7 +37,6 @@ import { crawlAndDownload } from "@/actions/crawl";
 import useDataStore from "@/app/store/useDataStore";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
-import chromium from "@sparticuz/chromium";
 
 export default async function Urls() {
   const [fileContent, setFileContent] = useState("");
@@ -55,8 +54,6 @@ export default async function Urls() {
   };
 
   const onSubmit = async () => {
-    console.log("Chromium path:", await chromium.executablePath());
-
     const name = (document.getElementById("name") as HTMLInputElement).value;
     const urlsInText = (
       document.getElementById("urls_in_text") as HTMLInputElement
