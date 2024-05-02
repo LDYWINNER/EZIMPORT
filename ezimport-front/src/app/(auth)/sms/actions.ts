@@ -91,13 +91,13 @@ export async function smsLogIn(prevState: ActionState, formData: FormData) {
         },
       });
       const client = twilio(
-        process.env.TWILIO_ACCOUNT_SID,
-        process.env.TWILIO_AUTH_TOKEN
+        process.env.NEXT_PUBLIC_TWILIO_ACCOUNT_SID,
+        process.env.NEXT_PUBLIC_TWILIO_AUTH_TOKEN
       );
       await client.messages.create({
         body: `Your verification code is: ${token}`,
-        from: process.env.TWILIO_PHONE_NUMBER!,
-        to: process.env.MY_PHONE_NUMBER!,
+        from: process.env.NEXT_PUBLIC_TWILIO_PHONE_NUMBER!,
+        to: process.env.NEXT_PUBLIC_MY_PHONE_NUMBER!,
       });
       return {
         token: true,

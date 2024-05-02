@@ -8,6 +8,6 @@ interface SessionContent {
 export default function getSession() {
   return getIronSession<SessionContent>(cookies(), {
     cookieName: "ezimport-auth-cookieq",
-    password: process.env.COOKIE_PASSWORD!,
+    password: process.env.NEXT_PUBLIC_COOKIE_PASSWORD!,
   });
 }
