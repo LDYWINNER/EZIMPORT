@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
     }
   } else {
     if (exists) {
-      return NextResponse.redirect(new URL("/chats", request.url));
+      return NextResponse.redirect(new URL("/websites", request.url));
     }
   }
 }
