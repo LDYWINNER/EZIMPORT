@@ -1,12 +1,14 @@
-import chromium from "chrome-aws-lambda";
+// import chromium from "chrome-aws-lambda";
+import chromium from "@sparticuz/chromium";
+import puppeteer from "puppeteer-core";
 
 export default async function setupPuppeteer() {
   console.log("Chromium path:", await chromium.executablePath);
 
-  const browser = await chromium.puppeteer.launch({
+  const browser = await puppeteer.launch({
     args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
+    executablePath: await chromium.executablePath(),
     headless: true,
     ignoreHTTPSErrors: true,
   });
