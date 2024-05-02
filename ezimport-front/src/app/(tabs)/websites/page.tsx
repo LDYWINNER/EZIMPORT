@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 
-export const websites_for_crawling = [
+const websites_for_crawling = [
   {
     id: "ople",
     name: "Ople.com",
