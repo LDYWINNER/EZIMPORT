@@ -1,6 +1,6 @@
 "use server";
 
-import puppeteer from "puppeteer";
+import setupPuppeteer from "@/lib/puppeteerSetup";
 
 const TM = 3000; // time to wait for page to load + avoid detection
 
@@ -18,7 +18,8 @@ export async function crawlAndDownload(formData: FormData) {
   // }
 
   // crawl
-  const browser = await puppeteer.launch();
+  // const browser = await puppeteer.launch();
+  const browser = await setupPuppeteer();
   const page = await browser.newPage();
 
   const excelData: Array<Array<string>> = [["품명", "품절 사이즈"]];
