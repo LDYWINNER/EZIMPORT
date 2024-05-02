@@ -19,6 +19,11 @@ const nextConfig = {
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
         use: ["@svgr/webpack"],
+      },
+      // Ignore .map files
+      {
+        test: /\.map$/,
+        use: "ignore-loader",
       }
     );
 
