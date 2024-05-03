@@ -5,12 +5,12 @@ chromium.setHeadlessMode = true;
 chromium.setGraphicsMode = false;
 
 export default async function setupPuppeteer() {
+  console.log(chromium.executablePath());
   const browser = await puppeteer.launch({
     args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath(),
-    headless: true,
-    ignoreHTTPSErrors: true,
+    headless: chromium.headless,
   });
 
   console.log("Chromium path:", await chromium.executablePath());
@@ -21,3 +21,5 @@ export default async function setupPuppeteer() {
 //     defaultViewport: chromium.defaultViewport,
 //     executablePath: await chromium.executablePath,
 //     headless: chromium.headless,
+
+// ignoreHTTPSErrors: true,
