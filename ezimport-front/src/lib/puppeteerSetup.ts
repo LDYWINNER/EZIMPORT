@@ -1,6 +1,9 @@
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 
+chromium.setHeadlessMode = true;
+chromium.setGraphicsMode = false;
+
 export default async function setupPuppeteer() {
   const browser = await puppeteer.launch({
     args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],

@@ -28,7 +28,7 @@ export async function crawlAndDownload(formData: FormData) {
   const urls = urls_in_text.concat(urls_from_file);
 
   for (const path of urls) {
-    console.log("path:", path); // Just for checking
+    // console.log("path:", path); // Just for checking
 
     try {
       await page.goto(path);
