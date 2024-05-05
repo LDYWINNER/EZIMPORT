@@ -20,10 +20,10 @@ export async function crawlAndDownload(formData: FormData) {
 
   // crawl
   // for local
-  // const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch();
 
   // for deploy
-  const browser = await setupPuppeteer();
+  //const browser = await setupPuppeteer();
 
   const page = await browser.newPage();
 
