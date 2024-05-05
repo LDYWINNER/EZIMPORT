@@ -52,7 +52,7 @@ export async function crawlAndDownload(formData: FormData) {
         .map((text) => text.split(/\s+/)[0])
         .join(" ");
 
-      // console.log(name, outOfStockSizes); // Just for checking
+      console.log(name, outOfStockSizes); // Just for checking
 
       excelData.push([name, outOfStockSizes]);
     } catch (error) {
