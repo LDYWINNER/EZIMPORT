@@ -6,7 +6,7 @@ chromium.setGraphicsMode = false;
 
 export default async function setupPuppeteer() {
   console.log("Chromium path here:", await chromium.executablePath());
-  const browser = puppeteer.launch({
+  const browser = await puppeteer.launch({
     args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath(),
