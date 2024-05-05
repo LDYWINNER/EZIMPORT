@@ -44,6 +44,7 @@ export default async function Dashboard() {
   };
 
   if (!excelData) {
+    console.log("excelData");
     console.log(excelData);
     return <div>Loading...</div>;
   }
