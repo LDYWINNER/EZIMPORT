@@ -38,6 +38,8 @@ export async function crawlAndDownload(formData: FormData) {
     try {
       await page.goto(path, { waitUntil: "domcontentloaded" });
 
+      console.log(page.title());
+
       const name = await page.$eval(
         ".normal_reserve_item_name",
         (elem) => elem.textContent || ""
