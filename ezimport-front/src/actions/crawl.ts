@@ -1,9 +1,9 @@
 "use server";
 
 import setupPuppeteer from "@/lib/puppeteerSetup";
-import puppeteer from "puppeteer";
+// import puppeteer from "puppeteer";
 
-const TM = 3000; // time to wait for page to load + avoid detection
+// const TM = 3000; // time to wait for page to load + avoid detection
 
 export async function crawlAndDownload(formData: FormData) {
   const data = {
@@ -20,10 +20,10 @@ export async function crawlAndDownload(formData: FormData) {
 
   // crawl
   // for local
-  const browser = await puppeteer.launch();
+  // const browser = await puppeteer.launch();
 
   // for deploy
-  //const browser = await setupPuppeteer();
+  const browser = await setupPuppeteer();
 
   const page = await browser.newPage();
 
