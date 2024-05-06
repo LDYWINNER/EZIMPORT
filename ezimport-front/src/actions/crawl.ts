@@ -37,6 +37,9 @@ export async function crawlAndDownload(formData: FormData) {
 
     try {
       await page.goto(path, { waitUntil: "domcontentloaded" });
+      await page.waitForSelector(".normal_reserve_item_name", {
+        visible: true,
+      });
 
       console.log(page.title());
 
