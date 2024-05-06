@@ -36,12 +36,13 @@ export async function crawlAndDownload(formData: FormData) {
     console.log("path:", path); // Just for checking
 
     try {
-      await page.goto(path, { waitUntil: "domcontentloaded" });
-      await page.waitForSelector(".normal_reserve_item_name", {
-        visible: true,
-      });
+      await page.goto(path);
+      await page.waitForSelector(".normal_reserve_item_name");
+      // await page.waitForSelector(".normal_reserve_item_name", {
+      //   visible: true,
+      // });
 
-      console.log(page.title());
+      console.log(await page.title());
 
       const name = await page.$eval(
         ".normal_reserve_item_name",
