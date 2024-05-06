@@ -11,7 +11,7 @@ export default async function setupPuppeteer() {
     args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath(),
-    headless: "new",
+    headless: chromium.headless,
     ignoreHTTPSErrors: true,
   });
 
