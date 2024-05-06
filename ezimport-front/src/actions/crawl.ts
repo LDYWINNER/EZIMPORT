@@ -36,7 +36,7 @@ export async function crawlAndDownload(formData: FormData) {
     console.log("path:", path); // Just for checking
 
     try {
-      await page.goto(path);
+      page.goto(path);
       await page.waitForSelector(".normal_reserve_item_name", {
         visible: true,
       });
