@@ -23,9 +23,6 @@ export async function crawlAndDownload(formData: FormData) {
   // const browser = await puppeteer.launch();
 
   // for deploy
-  const browser = await setupPuppeteer();
-
-  const page = await browser.newPage();
 
   const excelData: Array<Array<string>> = [["품명", "품절 사이즈"]];
   const urls_in_text = (data.urls_in_text as string).split("\n") || [];
@@ -36,6 +33,9 @@ export async function crawlAndDownload(formData: FormData) {
     console.log("path:", path); // Just for checking
 
     try {
+      const browser = await setupPuppeteer();
+
+      const page = await browser.newPage();
       await page.goto(path);
       await page.waitForSelector(".normal_reserve_item_name");
       // await page.waitForSelector(".normal_reserve_item_name", {
