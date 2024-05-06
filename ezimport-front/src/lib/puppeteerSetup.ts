@@ -1,8 +1,8 @@
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 
-// chromium.setHeadlessMode = true;
-// chromium.setGraphicsMode = false;
+chromium.setHeadlessMode = true;
+chromium.setGraphicsMode = false;
 
 export default async function setupPuppeteer() {
   // console.log("Chromium path here:", await chromium.executablePath());
