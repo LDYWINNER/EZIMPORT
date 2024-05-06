@@ -80,6 +80,7 @@ export default async function Urls() {
     formData.append("status", status);
 
     const response = await crawlAndDownload(formData);
+    console.log("formData", formData);
     setExcelData(response);
 
     redirect("/websites/products");

@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: [
-      "puppeteer-core",
-      "@sparticuz/chromium",
-      "puppeteer",
-    ],
+    serverComponentsExternalPackages: ["puppeteer-core", "@sparticuz/chromium"],
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
