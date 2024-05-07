@@ -14,4 +14,5 @@ COPY package*.json ./
 # RUN npm install
 RUN npm ci
 COPY ./src .
+RUN npx next build
 CMD [ "npx", "next", "start" ]
