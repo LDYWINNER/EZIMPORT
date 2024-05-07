@@ -5,6 +5,11 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 
 WORKDIR /usr/src/app
 
+# Change ownership of the working directory
+USER root
+RUN chown -R pptruser:pptruser /usr/src/app
+USER pptruser
+
 COPY package*.json ./
 RUN npm install
 RUN npm ci
