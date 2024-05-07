@@ -9,6 +9,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 RUN npm ci
+COPY ./prisma prisma
 COPY . .
 RUN npm run build
 CMD [ "npx", "next", "start" ]
