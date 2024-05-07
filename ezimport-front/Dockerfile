@@ -7,9 +7,11 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 
 WORKDIR /usr/src/app
 
+COPY prisma ./prisma/
+
 COPY package*.json ./
 RUN npm ci
-COPY prisma ./prisma/
+
 COPY . .
 RUN npm run build
 CMD [ "npx", "next", "start" ]
