@@ -10,5 +10,5 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci
 COPY ./src .
-RUN npx next build
+RUN npm run build
 CMD [ "npx", "next", "start" ]

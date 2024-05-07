@@ -1,6 +1,5 @@
 "use server";
 
-import setupPuppeteer from "@/lib/puppeteerSetup";
 import puppeteer from "puppeteer";
 
 // const TM = 3000; // time to wait for page to load + avoid detection
