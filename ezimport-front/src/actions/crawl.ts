@@ -25,6 +25,10 @@ export async function crawlAndDownload(formData: FormData) {
       "--no-sandbox",
       "--single-process",
       "--no-zygote",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--no-first-run",
+      "--disable-gpu",
     ],
     executablePath:
       process.env.NODE_ENV === "production"
@@ -43,7 +47,7 @@ export async function crawlAndDownload(formData: FormData) {
     console.log("path:", path); // Just for checking
 
     try {
-      await page.goto(path);
+      await page.goto(path, { waitUntil: "domcontentloaded" });
       await page.waitForSelector(".normal_reserve_item_name", {
         visible: true,
       });
