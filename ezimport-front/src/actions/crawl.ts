@@ -32,6 +32,8 @@ export async function crawlAndDownload(formData: FormData) {
         : puppeteer.executablePath(),
   });
 
+  const page = await browser.newPage();
+
   const excelData: Array<Array<string>> = [["품명", "품절 사이즈"]];
   const urls_in_text = (data.urls_in_text as string).split("\n") || [];
   const urls_from_file = (data.urls_from_file as string).split("\n") || [];
@@ -41,15 +43,10 @@ export async function crawlAndDownload(formData: FormData) {
     console.log("path:", path); // Just for checking
 
     try {
-      const page = await browser.newPage();
-
       await page.goto(path);
-      await page.waitForSelector(".normal_reserve_item_name");
-      // await page.waitForSelector(".normal_reserve_item_name", {
-      //   visible: true,
-      // });
-
-      console.log(await page.title());
+      await page.waitForSelector(".normal_reserve_item_name", {
+        visible: true,
+      });
 
       const name = await page.$eval(
         ".normal_reserve_item_name",
@@ -74,8 +71,6 @@ export async function crawlAndDownload(formData: FormData) {
     } catch (error) {
       // console.log(error);
       continue;
-    } finally {
-      await browser.close();
     }
   }
 
