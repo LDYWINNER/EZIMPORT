@@ -1,8 +1,38 @@
 "use server";
 
-import puppeteer from "puppeteer";
+import puppeteer, { Page } from "puppeteer";
 
 // const TM = 3000; // time to wait for page to load + avoid detection
+
+async function crawlUrl(page: Page, path: string, excelData: any[][]) {
+  try {
+    await page.goto(path.trim(), { waitUntil: "domcontentloaded" });
+    await page.waitForSelector(".normal_reserve_item_name");
+
+    const name = await page.$eval(
+      ".normal_reserve_item_name",
+      (elem: { textContent: any }) => elem.textContent || ""
+    );
+    const sizeButtons = await page.$$eval(
+      ".grid-element--1c5t6",
+      (elements: any[]) =>
+        elements
+          .map((e: { textContent: string }) => e.textContent?.trim() || "")
+          .filter((text: string | string[]) => text.includes("売り切れ"))
+    );
+
+    let outOfStockSizes = sizeButtons
+      .map((text: string) => text.split(/\s+/)[0])
+      .join(" ");
+
+    console.log("result here");
+    console.log(name, outOfStockSizes);
+
+    excelData.push([name, outOfStockSizes]);
+  } catch (error) {
+    console.log(`Error crawling ${path}: ${error}`);
+  }
+}
 
 export async function crawlAndDownload(formData: FormData) {
   const data = {
@@ -43,40 +73,7 @@ export async function crawlAndDownload(formData: FormData) {
   const urls_from_file = (data.urls_from_file as string).split("\n") || [];
   const urls = urls_in_text.concat(urls_from_file);
 
-  for (const path of urls) {
-    console.log("path:", path); // Just for checking
-
-    try {
-      await page.goto(path, { waitUntil: "domcontentloaded" });
-      await page.waitForSelector(".normal_reserve_item_name", {
-        visible: true,
-      });
-
-      const name = await page.$eval(
-        ".normal_reserve_item_name",
-        (elem) => elem.textContent || ""
-      );
-      const sizeButtons = await page.$$eval(
-        ".grid-element--1c5t6",
-        (elements) =>
-          elements
-            .map((e) => e.textContent?.trim() || "")
-            .filter((text) => text.includes("売り切れ"))
-      );
-
-      let outOfStockSizes = sizeButtons
-        .map((text) => text.split(/\s+/)[0])
-        .join(" ");
-
-      console.log("result here");
-      console.log(name, outOfStockSizes); // Just for checking
-
-      excelData.push([name, outOfStockSizes]);
-    } catch (error) {
-      // console.log(error);
-      continue;
-    }
-  }
+  await Promise.all(urls.map((path) => crawlUrl(page, path, excelData)));
 
   console.log(excelData);
   return {
