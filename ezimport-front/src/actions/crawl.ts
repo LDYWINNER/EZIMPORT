@@ -18,7 +18,6 @@ export async function crawlAndDownload(formData: FormData) {
   // }
 
   // crawl
-  // for local
   const browser = await puppeteer.launch({
     headless: true,
     args: [
@@ -33,11 +32,6 @@ export async function crawlAndDownload(formData: FormData) {
         : puppeteer.executablePath(),
   });
 
-  // for deploy
-  // const browser = await setupPuppeteer();
-
-  const page = await browser.newPage();
-
   const excelData: Array<Array<string>> = [["품명", "품절 사이즈"]];
   const urls_in_text = (data.urls_in_text as string).split("\n") || [];
   const urls_from_file = (data.urls_from_file as string).split("\n") || [];
@@ -47,6 +41,8 @@ export async function crawlAndDownload(formData: FormData) {
     console.log("path:", path); // Just for checking
 
     try {
+      const page = await browser.newPage();
+
       await page.goto(path);
       await page.waitForSelector(".normal_reserve_item_name");
       // await page.waitForSelector(".normal_reserve_item_name", {
