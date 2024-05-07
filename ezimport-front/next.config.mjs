@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config) {
+    // Configure path aliases
+    config.resolve.alias["@"] = path.resolve("./src");
+
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg")
@@ -32,8 +35,9 @@ const nextConfig = {
 
     return config;
   },
-  experimental: {
-    serverComponentsExternalPackages: ["puppeteer-core", "@sparticuz/chromium"],
-  },
 };
 export default nextConfig;
+
+// experimental: {
+//   serverComponentsExternalPackages: ["puppeteer-core", "@sparticuz/chromium"],
+// },

@@ -7,11 +7,7 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 
 WORKDIR /usr/src/app
 
-# Change ownership of the working directory
-# USER root
-
 COPY package*.json ./
-# RUN npm install
 RUN npm ci
 COPY ./src .
 RUN npx next build
