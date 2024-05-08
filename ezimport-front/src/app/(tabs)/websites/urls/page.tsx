@@ -53,7 +53,7 @@ export default async function Urls() {
     }
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const name = (document.getElementById("name") as HTMLInputElement).value;
     const urlsInText = (
       document.getElementById("urls_in_text") as HTMLInputElement
@@ -79,7 +79,7 @@ export default async function Urls() {
     formData.append("urls_from_file", urlsFromFile);
     formData.append("status", status);
 
-    const response = crawlAndDownload(formData);
+    const response = await crawlAndDownload(formData);
     console.log(response);
     console.log("formData", formData);
     setExcelData(response);
@@ -87,12 +87,12 @@ export default async function Urls() {
     redirect("/websites/products");
   };
 
-  const onValid = () => {
+  const onValid = async () => {
     toast.success(
       "크롤링이 시작되었습니다. 크롤링이 완료되면 크롤링 결과 페이지에서 다운로드 받으실 수 있습니다. 그 전까진 페이지를 닫거나 조작하지 말아주세요.",
       { duration: 5000 }
     );
-    onSubmit();
+    await onSubmit();
   };
 
   return (
