@@ -53,7 +53,7 @@ export async function crawlAndDownload(formData: FormData) {
     try {
       await page.goto(path, {
         waitUntil: "domcontentloaded",
-        timeout: 120000,
+        timeout: 0,
       });
       await page.waitForSelector(".normal_reserve_item_name", {
         visible: true,
