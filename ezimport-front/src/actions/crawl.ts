@@ -46,6 +46,10 @@ export async function crawlAndDownload(formData: FormData) {
   for (const path of urls) {
     console.log("path:", path); // Just for checking
 
+    if (path === "") {
+      continue;
+    }
+
     try {
       await page.goto(path, { waitUntil: "domcontentloaded" });
       await page.waitForSelector(".normal_reserve_item_name", {
