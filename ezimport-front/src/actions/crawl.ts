@@ -52,6 +52,8 @@ export async function crawlAndDownload(formData: FormData) {
         visible: true,
       });
 
+      console.log(await page.title());
+
       const name = await page.$eval(
         ".normal_reserve_item_name",
         (elem) => elem.textContent || ""
@@ -73,7 +75,7 @@ export async function crawlAndDownload(formData: FormData) {
 
       excelData.push([name, outOfStockSizes]);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       continue;
     }
   }
